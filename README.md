@@ -6,6 +6,8 @@ This is a project that follows along with Drew Conley's RPG tutorials.
 
 See: https://www.youtube.com/watch?v=fyi4vfbKEeo
 
+![pizza-rpg-gif](https://github.com/steveocrypto/pizza-rpg/raw/master/src/assets/demo-p8.gif)
+
 ## Install
 
 `yarn install`
