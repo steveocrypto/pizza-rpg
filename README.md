@@ -1,4 +1,6 @@
-# Pizza RPG - Create React App + TypeScript + Tailwind
+# Pizza RPG
+
+## Create React App + TypeScript + Tailwind
 
 This is a project that follows along with Drew Conley's RPG tutorials.
 
