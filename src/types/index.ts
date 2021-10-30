@@ -4,8 +4,8 @@ import { Person } from "classes/Person";
 export interface GameObjectType {
   x: number;
   y: number;
-  direction?: Direction;
   src?: string;
+  direction?: Direction;
   disableShadow?: boolean;
   isPlayerControlled?: boolean;
   behaviorLoop?: Behavior[];

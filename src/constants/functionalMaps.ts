@@ -24,6 +24,7 @@ export interface GameObjectType {
   x: number;
   y: number;
   src: string;
+  disableShadow?: boolean;
   isPlayerControlled?: boolean;
   behaviorLoop?: Behavior[];
 }

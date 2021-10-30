@@ -32,7 +32,7 @@ export function Overworld() {
     timerId = requestAnimationFrame(step);
 
     return () => cancelAnimationFrame(timerId);
-  });
+  }, [canvas, ctx, drawLower, drawObjects, drawUpper]);
 
   return null;
 }

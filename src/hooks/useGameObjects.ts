@@ -1,6 +1,4 @@
-import { GameObjectsType } from "constants/functionalMaps";
-import { useEffect, useState } from "react";
-import ShadowImg from "assets/characters/shadow.png";
+import { GameObjectsType, GameObjectType } from "constants/functionalMaps";
 import { useSprite } from "./useSprite";
 
 interface Props {
@@ -8,44 +6,30 @@ interface Props {
   ctx: CanvasRenderingContext2D;
 }
 
-interface DrawableImage {
+export interface ReadySprite {
   image: HTMLImageElement;
-  shadow: HTMLImageElement;
-  x: number;
-  y: number;
+  gameObject: GameObjectType;
 }
 
 export function useGameObjects({ objects, ctx }: Props) {
-  const [images, setImages] = useState<DrawableImage[]>([]);
   const [drawSprite] = useSprite({ ctx });
 
-  useEffect(() => {
-    const images: DrawableImage[] = [];
-
+  function prepareSprites() {
+    let sprites: ReadySprite[] = [];
     Object.values(objects).forEach((object) => {
       const image = new Image();
       image.src = object.src;
-      image.onload = () => {
-        const shadow = new Image();
-        shadow.src = ShadowImg;
-        shadow.onload = () => {
-          images.push({
-            image,
-            shadow,
-            x: object.x,
-            y: object.y,
-          });
-        };
-      };
+      sprites.push({ image, gameObject: object });
     });
-    setImages(images);
-  }, [objects]);
+    return sprites;
+  }
 
-  function drawObjects() {
-    images.forEach((image) => {
-      drawSprite(image);
+  function drawSprites() {
+    const sprites = prepareSprites();
+    sprites.forEach((sprite) => {
+      drawSprite(sprite);
     });
   }
 
-  return [drawObjects];
+  return [drawSprites];
 }
