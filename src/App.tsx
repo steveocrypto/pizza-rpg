@@ -1,26 +1,19 @@
-import { useEffect, useRef } from "react";
-import { Overworld } from "classes/Overworld";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { ClassBased } from "routes/ClassBased";
+import { ComponentBased } from "routes/ComponentBased";
+import { Header } from "layout/Header";
 import "./index.css";
 
 function App() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  // Init
-  useEffect(() => {
-    if (canvasRef.current) {
-      const overworld = new Overworld({ canvas: canvasRef.current });
-      overworld.init();
-    }
-  }, []);
-
   return (
-    <div className="font-sans antialiased bg-gray-800 min-h-screen">
-      <div className="pt-20">
-        <div className="game-container w-[352px] h-[198px] relative border border-gray-700 mx-auto transform scale-[3] origin-top">
-          <canvas ref={canvasRef} className="game-canvas" width={352} height={198} />
-        </div>
-      </div>
-    </div>
+    <Router>
+      <Header />
+      <Switch>
+        <Route exact path="/class" render={() => <ClassBased />} />
+        <Route path="/component" render={() => <ComponentBased />} />
+        <Route path="/" render={() => <ClassBased />} />
+      </Switch>
+    </Router>
   );
 }
 
