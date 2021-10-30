@@ -1,6 +1,7 @@
 import { GameObjectsType } from "constants/functionalMaps";
 import { useEffect, useState } from "react";
 import ShadowImg from "assets/characters/shadow.png";
+import { useSprite } from "./useSprite";
 
 interface Props {
   objects: GameObjectsType;
@@ -16,6 +17,7 @@ interface DrawableImage {
 
 export function useGameObjects({ objects, ctx }: Props) {
   const [images, setImages] = useState<DrawableImage[]>([]);
+  const [drawSprite] = useSprite({ ctx });
 
   useEffect(() => {
     const images: DrawableImage[] = [];
@@ -41,29 +43,7 @@ export function useGameObjects({ objects, ctx }: Props) {
 
   function drawObjects() {
     images.forEach((image) => {
-      ctx.drawImage(
-        image.image,
-        0, //left cut
-        0, //top cut,
-        32, //width of cut
-        32, //height of cut
-        image.x * 16 - 8,
-        image.y * 16 - 18,
-        32,
-        32
-      );
-
-      ctx.drawImage(
-        image.shadow,
-        0, //left cut
-        0, //top cut,
-        32, //width of cut
-        32, //height of cut
-        image.x * 16 - 8,
-        image.y * 16 - 18,
-        32,
-        32
-      );
+      drawSprite(image);
     });
   }
 

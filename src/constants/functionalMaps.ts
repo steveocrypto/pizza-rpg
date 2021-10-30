@@ -6,7 +6,7 @@ import Hero from "assets/characters/people/hero.png";
 import Npc1 from "assets/characters/people/npc1.png";
 import Npc2 from "assets/characters/people/npc2.png";
 import Npc3 from "assets/characters/people/npc3.png";
-import { asGridCoord, withGrid } from "utils";
+import { asGridCoord } from "utils";
 import { Behavior, Walls } from "types";
 
 export interface Map {

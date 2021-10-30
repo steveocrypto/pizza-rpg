@@ -19,6 +19,7 @@ export function Overworld() {
     // Game loop
     const step = () => {
       console.log("Step!");
+
       //Clear off the canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
