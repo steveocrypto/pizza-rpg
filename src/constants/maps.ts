@@ -11,17 +11,15 @@ import { Person } from "classes/Person";
 import { Walls } from "types";
 
 export interface Map {
-  [name: string]: {
-    lowerSrc: string;
-    upperSrc: string;
-    gameObjects: {
-      [name: string]: GameObject;
-    };
-    walls: Walls;
+  lowerSrc: string;
+  upperSrc: string;
+  gameObjects: {
+    [name: string]: GameObject;
   };
+  walls: Walls;
 }
 
-export const Maps: Map = {
+export const Maps: { [name: string]: Map } = {
   DemoRoom: {
     lowerSrc: DemoLower,
     upperSrc: DemoUpper,
