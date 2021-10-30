@@ -4,7 +4,6 @@ import { CanvasContext } from "routes/ComponentBased";
 import { useGameObjects } from "hooks/useGameObjects";
 
 export function Overworld() {
-  console.log("Render `Overworld`");
   const context = useContext(CanvasContext);
   if (!context) throw new Error("No context found");
   const { ctx, canvas, map } = context;
@@ -18,8 +17,6 @@ export function Overworld() {
 
     // Game loop
     const step = () => {
-      console.log("Step!");
-
       //Clear off the canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 

@@ -1,27 +1,13 @@
-import { useEffect, useRef } from "react";
 import { ReadySprite } from "./useGameObjects";
 import ShadowImg from "assets/characters/shadow.png";
+import { useImage } from "./useImage";
 
 interface Props {
   ctx: CanvasRenderingContext2D;
 }
 
 export function useSprite({ ctx }: Props) {
-  const shadowRef = useRef<HTMLImageElement>(prepareShadow());
-
-  useEffect(() => {
-    const image = new Image();
-    image.src = ShadowImg;
-    image.onload = () => {
-      shadowRef.current = image;
-    };
-  }, []);
-
-  function prepareShadow() {
-    const image = new Image();
-    image.src = ShadowImg;
-    return image;
-  }
+  const shadow = useImage(ShadowImg);
 
   function draw(sprite: ReadySprite) {
     const { image, gameObject } = sprite;
@@ -40,9 +26,9 @@ export function useSprite({ ctx }: Props) {
       32
     );
 
-    if (!gameObject.disableShadow && shadowRef.current) {
+    if (!gameObject.disableShadow && shadow) {
       ctx.drawImage(
-        shadowRef.current,
+        shadow,
         0, //left cut
         0, //top cut,
         32, //width of cut

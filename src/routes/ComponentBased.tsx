@@ -9,7 +9,6 @@ export const CanvasContext = createContext<{
 } | null>(null);
 
 export function ComponentBased() {
-  console.log("Render `ComponentBased`");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null);
   const [map, setMap] = useState(Maps.Kitchen);
