@@ -1,5 +1,5 @@
 import { OverworldMap } from "./OverworldMap";
-import { Maps } from "constants/maps";
+import { Maps } from "constants/classMaps";
 import { DirectionInput } from "./DirectionInput";
 
 interface Config {

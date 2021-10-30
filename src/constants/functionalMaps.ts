@@ -3,6 +3,7 @@ import DemoLower from "assets/maps/DemoLower.png";
 import DemoUpper from "assets/maps/DemoUpper.png";
 // import KitchenUpper from "assets/maps/KitchenUpper.png";
 // import KitchenLower from "assets/maps/KitchenLower.png";
+import Hero from "assets/characters/people/hero.png";
 import Npc1 from "assets/characters/people/npc1.png";
 import Npc2 from "assets/characters/people/npc2.png";
 // import Npc3 from "assets/characters/people/npc3.png";
@@ -23,7 +24,7 @@ export interface GameObjectsType {
 export interface GameObjectType {
   x: number;
   y: number;
-  src?: string;
+  src: string;
   isPlayerControlled?: boolean;
   behaviorLoop?: Behavior[];
 }
@@ -36,6 +37,7 @@ export const Maps: { [name: string]: Map } = {
       hero: {
         x: 5,
         y: 6,
+        src: Hero,
         isPlayerControlled: true,
       },
       npc1: {
