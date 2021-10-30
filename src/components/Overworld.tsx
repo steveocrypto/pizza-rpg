@@ -1,14 +1,15 @@
 import { useEffect } from "react";
-import { Maps } from "constants/maps";
+import { Maps } from "constants/functionalMaps";
 import { OverworldMap } from "./OverworldMap";
+import { GameObjects } from "./GameObjects";
 
 export function Overworld() {
   console.log("Render `Overworld`");
+  const map = Maps.DemoRoom;
 
   useEffect(() => {
     // Game loop
     const step = () => {
-      console.log("Step!");
       requestAnimationFrame(() => {
         step();
       });
@@ -17,5 +18,11 @@ export function Overworld() {
     step();
   });
 
-  return <OverworldMap map={Maps.DemoRoom} />;
+  return (
+    <>
+      <OverworldMap src={map.lowerSrc} />
+      <GameObjects gameObjects={map.gameObjects} />
+      <OverworldMap src={map.upperSrc} />
+    </>
+  );
 }

@@ -1,36 +1,26 @@
-import { Map } from "constants/maps";
-import { useContext } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { CanvasContext } from "routes/ComponentBased";
 
 interface Props {
-  map: Map;
+  src: string;
 }
 
-export function OverworldMap({ map }: Props) {
+export function OverworldMap({ src }: Props) {
   console.log("Render `OverworldMap`");
   const context = useContext(CanvasContext);
   if (!context) throw new Error("Missing context!");
 
-  function drawLowerImage(ctx: CanvasRenderingContext2D) {
-    console.log("Drawing lower image...");
+  const image = useRef(createImage(src));
+
+  function createImage(src: string) {
     const image = new Image();
-    image.src = map.lowerSrc;
-    image.onload = () => {
-      ctx.drawImage(image, 0, 0);
-    };
+    image.src = src;
+    return image;
   }
 
-  function drawUpperImage(ctx: CanvasRenderingContext2D) {
-    console.log("Drawing upper image...");
-    const image = new Image();
-    image.src = map.upperSrc;
-    image.onload = () => {
-      ctx.drawImage(image, 0, 0);
-    };
-  }
-
-  drawLowerImage(context.ctx);
-  drawUpperImage(context.ctx);
+  useEffect(() => {
+    context.ctx.drawImage(image.current, 0, 0);
+  });
 
   return null;
 }
