@@ -9,12 +9,7 @@ export function Overworld() {
 
   useEffect(() => {
     // Game loop
-    const step = () => {
-      requestAnimationFrame(() => {
-        step();
-      });
-    };
-
+    const step = () => requestAnimationFrame(step);
     step();
   });
 
