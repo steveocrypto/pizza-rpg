@@ -1,16 +1,13 @@
 import { useContext, useLayoutEffect } from "react";
-import { Maps } from "constants/functionalMaps";
 import { useOverworldMap } from "hooks/useOverworldMap";
 import { CanvasContext } from "routes/ComponentBased";
 import { useGameObjects } from "hooks/useGameObjects";
 
 export function Overworld() {
+  console.log("Render `Overworld`");
   const context = useContext(CanvasContext);
   if (!context) throw new Error("No context found");
-  const { ctx } = context;
-
-  console.log("Render `Overworld`");
-  const map = Maps.DemoRoom;
+  const { ctx, canvas, map } = context;
 
   const [drawLower] = useOverworldMap({ src: map.lowerSrc, ctx });
   const [drawObjects] = useGameObjects({ objects: map.gameObjects, ctx });
@@ -22,6 +19,9 @@ export function Overworld() {
     // Game loop
     const step = () => {
       console.log("Step!");
+      //Clear off the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
       drawLower();
       drawObjects();
       drawUpper();

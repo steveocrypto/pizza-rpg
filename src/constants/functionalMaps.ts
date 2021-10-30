@@ -1,12 +1,11 @@
-// import { GameObject } from "classes/GameObject";
 import DemoLower from "assets/maps/DemoLower.png";
 import DemoUpper from "assets/maps/DemoUpper.png";
-// import KitchenUpper from "assets/maps/KitchenUpper.png";
-// import KitchenLower from "assets/maps/KitchenLower.png";
+import KitchenUpper from "assets/maps/KitchenUpper.png";
+import KitchenLower from "assets/maps/KitchenLower.png";
 import Hero from "assets/characters/people/hero.png";
 import Npc1 from "assets/characters/people/npc1.png";
 import Npc2 from "assets/characters/people/npc2.png";
-// import Npc3 from "assets/characters/people/npc3.png";
+import Npc3 from "assets/characters/people/npc3.png";
 import { asGridCoord, withGrid } from "utils";
 import { Behavior, Walls } from "types";
 
@@ -51,18 +50,6 @@ export const Maps: { [name: string]: Map } = {
           { type: "stand", direction: "up", time: 300 },
         ],
       },
-      npc2: {
-        x: withGrid(3),
-        y: withGrid(7),
-        src: Npc2,
-        behaviorLoop: [
-          { type: "walk", direction: "left" },
-          { type: "stand", direction: "up", time: 800 },
-          { type: "walk", direction: "up" },
-          { type: "walk", direction: "right" },
-          { type: "walk", direction: "down" },
-        ],
-      },
     },
     walls: {
       // "16,16": true,
@@ -71,5 +58,27 @@ export const Maps: { [name: string]: Map } = {
       [asGridCoord(7, 7)]: true,
       [asGridCoord(8, 7)]: true,
     },
+  },
+  Kitchen: {
+    lowerSrc: KitchenLower,
+    upperSrc: KitchenUpper,
+    gameObjects: {
+      hero: {
+        x: 3,
+        y: 5,
+        src: Hero,
+      },
+      npcA: {
+        x: 9,
+        y: 6,
+        src: Npc2,
+      },
+      npcB: {
+        x: 10,
+        y: 8,
+        src: Npc3,
+      },
+    },
+    walls: {},
   },
 };
