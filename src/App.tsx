@@ -16,7 +16,10 @@ function App() {
   return (
     <div className="font-sans antialiased bg-gray-800 min-h-screen">
       <div className="pt-20">
-        <div className="game-container w-[352px] h-[198px] relative border border-gray-700 mx-auto transform scale-[3] origin-top">
+        <div
+          style={{ width: 352, height: 198 }}
+          className="game-container relative border border-gray-700 mx-auto transform scale-300 origin-top"
+        >
           <canvas ref={canvasRef} className="game-canvas" width={352} height={198} />
         </div>
       </div>
