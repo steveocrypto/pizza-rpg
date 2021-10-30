@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 interface Props {
   src: string;
@@ -7,20 +7,20 @@ interface Props {
 
 export function useOverworldMap({ src, ctx }: Props) {
   console.log("Render `OverworldMap`");
+  const imageRef = useRef<HTMLImageElement>();
 
-  const imageRef = useRef<HTMLImageElement>(createImage(src));
-
-  function createImage(src: string) {
+  useEffect(() => {
     const image = new Image();
     image.src = src;
     image.onload = () => {
       imageRef.current = image;
     };
-    return image;
-  }
+  }, [src]);
 
   function draw() {
-    ctx.drawImage(imageRef.current, 0, 0);
+    if (imageRef.current) {
+      ctx.drawImage(imageRef.current, 0, 0);
+    }
   }
 
   return [draw];

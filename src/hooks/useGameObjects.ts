@@ -1,4 +1,5 @@
 import { GameObjectsType, GameObjectType } from "constants/functionalMaps";
+import { useEffect, useRef } from "react";
 import { useSprite } from "./useSprite";
 
 interface Props {
@@ -13,22 +14,30 @@ export interface ReadySprite {
 
 export function useGameObjects({ objects, ctx }: Props) {
   const [drawSprite] = useSprite({ ctx });
+  const spritesRef = useRef<ReadySprite[]>([]);
 
-  function prepareSprites() {
-    let sprites: ReadySprite[] = [];
+  useEffect(() => {
+    spritesRef.current = [];
     Object.values(objects).forEach((object) => {
       const image = new Image();
       image.src = object.src;
-      sprites.push({ image, gameObject: object });
+      image.onload = () => {
+        spritesRef.current.push({
+          image,
+          gameObject: object,
+        });
+      };
     });
-    return sprites;
-  }
+  }, [objects]);
 
   function drawSprites() {
-    const sprites = prepareSprites();
-    sprites.forEach((sprite) => {
-      drawSprite(sprite);
-    });
+    const ready = spritesRef.current.length === Object.values(objects).length;
+
+    if (ready) {
+      spritesRef.current.forEach((sprite) => {
+        drawSprite(sprite);
+      });
+    }
   }
 
   return [drawSprites];
