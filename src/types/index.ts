@@ -1,15 +1,16 @@
 import { GameObject } from "classes/GameObject";
 import { Person } from "classes/Person";
 
-export interface GameObjectType {
-  x: number;
-  y: number;
-  direction?: Direction;
-  src?: string;
-  disableShadow?: boolean;
-  isPlayerControlled?: boolean;
-  behaviorLoop?: Behavior[];
-}
+// export interface GameObjectType {
+//   x: number;
+//   y: number;
+//   direction?: Direction;
+//   src?: string;
+//   disableShadow?: boolean;
+//   isPlayerControlled?: boolean;
+//   behaviorLoop?: Behavior[];
+//   talking?: { events: Behavior[] }[];
+// }
 
 export type Direction = "up" | "down" | "left" | "right";
 export type Axis = "x" | "y";
@@ -30,11 +31,12 @@ export interface Walls {
 
 export interface Behavior {
   type: "walk" | "stand" | "textMessage";
-  direction: Direction;
-  text?: string;
+  direction?: Direction;
+  faceHero?: string;
   time?: number;
   who?: string;
   retry?: boolean;
+  text?: string;
 }
 
 export interface GameObjects {
