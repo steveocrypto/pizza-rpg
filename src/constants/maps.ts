@@ -80,10 +80,10 @@ export const Maps: OverworldMaps = {
       [asGridCoord(7, 4)]: [
         {
           events: [
-            { who: "npc2", type: "walk", direction: "left" },
-            { who: "npc2", type: "stand", direction: "up", time: 200 },
+            { who: "npcB", type: "walk", direction: "left" },
+            { who: "npcB", type: "stand", direction: "up", time: 200 },
             { type: "textMessage", text: "You can't be in there!" },
-            { who: "npc2", type: "walk", direction: "right" },
+            { who: "npcB", type: "walk", direction: "right" },
             { who: "hero", type: "walk", direction: "down" },
           ],
         },
