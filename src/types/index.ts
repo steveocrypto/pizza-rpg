@@ -29,8 +29,9 @@ export interface Walls {
 }
 
 export interface Behavior {
-  type: "walk" | "stand";
+  type: "walk" | "stand" | "textMessage";
   direction: Direction;
+  text?: string;
   time?: number;
   who?: string;
   retry?: boolean;

@@ -1,6 +1,7 @@
 import { Behavior } from "types";
 import { OverworldMap } from "./OverworldMap";
 import { Person } from "./Person";
+import { TextMessage } from "./TextMessage";
 
 interface Config {
   map: OverworldMap;
@@ -46,6 +47,15 @@ export class OverworldEvent {
     };
 
     document.addEventListener("PersonWalkingComplete", completeHandler);
+  }
+
+  textMessage(resolve: (value: unknown) => void) {
+    const message = new TextMessage({
+      text: this.event.text || "",
+      onComplete: () => resolve(null),
+    });
+    message.init(document.querySelector(".game-container")!);
+    // document.addEventListener("TextMessageComplete", completeHandler);
   }
 
   async init() {
