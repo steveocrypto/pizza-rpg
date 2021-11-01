@@ -63,6 +63,9 @@ export class OverworldMap {
     }
 
     this.isCutscenePlaying = false;
+
+    // Reset NPCS to do their idle behavior
+    Object.values(this.gameObjects).forEach((object) => object.doBehaviorEvent(this));
   }
 
   // Walls
