@@ -18,6 +18,7 @@ export class GameObject {
   isMounted: boolean;
   behaviorLoop: Behavior[];
   behaviorLoopIndex: number;
+  isStanding: boolean;
 
   constructor(config: GameObjectType) {
     this.id = "";
@@ -31,6 +32,7 @@ export class GameObject {
     });
     this.behaviorLoop = config.behaviorLoop || [];
     this.behaviorLoopIndex = 0;
+    this.isStanding = false;
   }
 
   mount(map: OverworldMap) {
@@ -45,7 +47,7 @@ export class GameObject {
   update(state: State) {}
 
   async doBehaviorEvent(map: OverworldMap) {
-    if (map.isCutscenePlaying || this.behaviorLoop.length === 0) {
+    if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
       return;
     }
 
