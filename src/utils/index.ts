@@ -33,6 +33,19 @@ export function nextPosition(initialX: number, initialY: number, direction: Dire
   return { x, y };
 }
 
+export function oppositeDirection(direction: Direction) {
+  switch (direction) {
+    case "left":
+      return "right";
+    case "right":
+      return "left";
+    case "up":
+      return "down";
+    case "down":
+      return "up";
+  }
+}
+
 export function emitEvent(name: string, detail: CustomEventDetail) {
   const event = new CustomEvent(name, {
     detail: {
