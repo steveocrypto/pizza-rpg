@@ -8,6 +8,7 @@ interface OverworldMapConfig {
   lowerSrc: string;
   upperSrc: string;
   walls: Walls;
+  cutsceneSpaces?: {};
 }
 
 export class OverworldMap {
@@ -16,6 +17,7 @@ export class OverworldMap {
   upperImage: HTMLImageElement;
   walls: Walls;
   isCutscenePlaying?: boolean;
+  cutsceneSpaces: { [coordinates: string]: { events: Behavior[] }[] } = {};
 
   constructor(config: OverworldMapConfig) {
     this.gameObjects = config.gameObjects;
@@ -26,6 +28,7 @@ export class OverworldMap {
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
     this.isCutscenePlaying = false;
+    this.cutsceneSpaces = config.cutsceneSpaces || {};
   }
 
   drawLowerImage(ctx: CanvasRenderingContext2D, cameraPerson: GameObject) {
@@ -68,8 +71,26 @@ export class OverworldMap {
     Object.values(this.gameObjects).forEach((object) => object.doBehaviorEvent(this));
   }
 
-  // Walls
+  checkForActionCutscene() {
+    const hero = this.gameObjects["hero"];
+    const nextCoords = nextPosition(hero.x, hero.y, hero.direction);
+    const match = Object.values(this.gameObjects).find((object) => {
+      return object.x === nextCoords.x && object.y === nextCoords.y;
+    });
+    if (!this.isCutscenePlaying && match && match.talking.length > 0) {
+      this.startCutscene(match.talking[0].events);
+    }
+  }
 
+  checkForFootstepCutscene() {
+    const hero = this.gameObjects["hero"];
+    const match = this.cutsceneSpaces[`${hero.x},${hero.y}`];
+    if (!this.isCutscenePlaying && match) {
+      this.startCutscene(match[0].events);
+    }
+  }
+
+  // Walls
   addWall(x: number, y: number) {
     this.walls[`${x},${y}`] = true;
   }

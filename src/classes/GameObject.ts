@@ -1,4 +1,4 @@
-import { Behavior, Direction, GameObjectType } from "types";
+import { Behavior, Direction } from "types";
 import { Sprite } from "./Sprite";
 import Hero from "assets/characters/people/hero.png";
 import { OverworldMap } from "./OverworldMap";
@@ -9,18 +9,28 @@ export interface State {
   map: OverworldMap;
 }
 
+export interface GameObjectConfig {
+  direction?: Direction;
+  x?: number;
+  y?: number;
+  src?: string;
+  behaviorLoop?: Behavior[];
+  talking?: { events: Behavior[] }[];
+}
+
 export class GameObject {
   id: string;
   x: number;
   y: number;
-  sprite: Sprite;
   direction: Direction;
+  sprite: Sprite;
   isMounted: boolean;
   behaviorLoop: Behavior[];
   behaviorLoopIndex: number;
   isStanding: boolean;
+  talking: { events: Behavior[] }[];
 
-  constructor(config: GameObjectType) {
+  constructor(config: GameObjectConfig) {
     this.id = "";
     this.isMounted = false;
     this.x = config.x || 0;
@@ -33,6 +43,7 @@ export class GameObject {
     this.behaviorLoop = config.behaviorLoop || [];
     this.behaviorLoopIndex = 0;
     this.isStanding = false;
+    this.talking = config.talking || [];
   }
 
   mount(map: OverworldMap) {

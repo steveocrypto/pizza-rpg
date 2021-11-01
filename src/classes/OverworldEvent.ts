@@ -1,4 +1,5 @@
 import { Behavior } from "types";
+import { oppositeDirection } from "utils";
 import { OverworldMap } from "./OverworldMap";
 import { Person } from "./Person";
 import { TextMessage } from "./TextMessage";
@@ -50,12 +51,15 @@ export class OverworldEvent {
   }
 
   textMessage(resolve: (value: unknown) => void) {
+    if (this.event.faceHero) {
+      const obj = this.map.gameObjects[this.event.faceHero];
+      obj.direction = oppositeDirection(this.map.gameObjects["hero"].direction);
+    }
     const message = new TextMessage({
       text: this.event.text || "",
       onComplete: () => resolve(null),
     });
     message.init(document.querySelector(".game-container")!);
-    // document.addEventListener("TextMessageComplete", completeHandler);
   }
 
   async init() {

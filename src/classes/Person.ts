@@ -1,14 +1,18 @@
-import { Behavior, DirectionUpdate, GameObjectType } from "types";
-import { GameObject, State } from "./GameObject";
+import { Behavior, DirectionUpdate } from "types";
+import { GameObject, GameObjectConfig, State } from "./GameObject";
 import { Animation } from "types";
 import { emitEvent } from "utils";
+
+interface PersonConfig extends GameObjectConfig {
+  isPlayerControlled?: boolean;
+}
 
 export class Person extends GameObject {
   movementProgressRemaining: number;
   directionUpdate: DirectionUpdate;
   isPlayerControlled: boolean;
 
-  constructor(config: GameObjectType) {
+  constructor(config: PersonConfig) {
     super(config);
     this.movementProgressRemaining = 0;
     this.isPlayerControlled = config.isPlayerControlled || false;
@@ -39,7 +43,7 @@ export class Person extends GameObject {
 
   startBehavior(state: State, behavior: Behavior) {
     // Set character direction to whatever behavrior has
-    this.direction = behavior.direction;
+    this.direction = behavior.direction || "down";
     if (behavior.type === "walk") {
       // Stop here if space is not free
       if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
