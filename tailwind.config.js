@@ -12,6 +12,10 @@ module.exports = {
       scale: {
         300: "3",
       },
+      fontSize: {
+        xxxs: "0.3rem",
+        xxs: "0.4rem",
+      },
     },
   },
   variants: {
