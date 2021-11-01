@@ -20,13 +20,15 @@ export class TextMessage {
 
   createElement() {
     const classes =
-      "text-message absolute left-0 right-0 bottom-0 h-8 bg-gray-900 border-t border-gray-900 text-white".split(" ");
+      "text-message absolute inset-x-0 bottom-0 m-1 h-8 rounded-md bg-gray-900 border-t border-gray-900 text-white".split(
+        " "
+      );
     this.element = document.createElement("div");
     this.element.classList.add(...classes);
     this.element.innerHTML = `
         <p class="absolute top-1 left-2 italic text-xxs">${this.text}</p>
         <div class="h-8 flex justify-end items-end p-1">
-            <button class="transition text-xxxs px-1 py-0.5 inline-flex items-center border border-transparent font-medium rounded shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Next</button>
+            <button class="transition text-xxxs px-1 py-0 inline-flex items-center border border-transparent font-medium rounded-sm shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Next</button>
         </div>`;
 
     this.element.querySelector("button")?.addEventListener("click", () => {
