@@ -12,12 +12,14 @@ export class Overworld {
   ctx: CanvasRenderingContext2D;
   map: OverworldMap;
   directionInput: DirectionInput;
+  isReadyToChangeMaps: boolean;
 
   constructor(config: Config) {
     this.canvas = config.canvas;
     this.ctx = config.canvas.getContext("2d")!;
     this.map = new OverworldMap(Maps.DemoRoom);
     this.directionInput = new DirectionInput();
+    this.isReadyToChangeMaps = false;
   }
 
   startGameLoop() {
@@ -75,8 +77,17 @@ export class Overworld {
     document.addEventListener("PersonWalkingComplete", completeHandler);
   }
 
-  init() {
+  startMap(mapKey: string) {
+    if (this.isReadyToChangeMaps) {
+      this.map = new OverworldMap(Maps[mapKey]);
+    }
+    this.map.overworld = this;
     this.map.mountObjects();
+    this.isReadyToChangeMaps = true;
+  }
+
+  init() {
+    this.startMap("DemoRoom");
 
     this.bindActionInput();
     this.bindHeroPositionCheck();
@@ -85,16 +96,5 @@ export class Overworld {
     this.directionInput.init();
 
     this.startGameLoop();
-
-    // this.map.startCutscene([
-    //   { who: "hero", type: "walk", direction: "down" },
-    //   { who: "hero", type: "walk", direction: "down" },
-    //   { who: "npc1", type: "walk", direction: "left" },
-    //   { who: "npc1", type: "walk", direction: "left" },
-    //   { who: "npc1", type: "stand", direction: "up", time: 800 },
-    //   { type: "textMessage", text: "Hi Ethan, how was school today?", direction: "down" },
-    //   { type: "textMessage", text: "Pretty good! I learned a lot.", direction: "down" },
-    //   { type: "textMessage", text: "Awesome! I hope you have a great day.", direction: "down" },
-    // ]);
   }
 }

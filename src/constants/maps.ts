@@ -10,7 +10,7 @@ import { GameObject } from "classes/GameObject";
 import { Person } from "classes/Person";
 import { Behavior, Walls } from "types";
 
-export interface Map {
+export interface OverworldMaps {
   [name: string]: {
     lowerSrc: string;
     upperSrc: string;
@@ -26,7 +26,7 @@ export interface Map {
   };
 }
 
-export const Maps: Map = {
+export const Maps: OverworldMaps = {
   DemoRoom: {
     lowerSrc: DemoLower,
     upperSrc: DemoUpper,
@@ -36,7 +36,7 @@ export const Maps: Map = {
         y: withGrid(6),
         isPlayerControlled: true,
       }),
-      npc1: new Person({
+      npcA: new Person({
         x: withGrid(7),
         y: withGrid(9),
         src: Npc1,
@@ -49,14 +49,14 @@ export const Maps: Map = {
         talking: [
           {
             events: [
-              { type: "textMessage", text: "I'm busy...", faceHero: "npc1" },
+              { type: "textMessage", text: "I'm busy...", faceHero: "npcA" },
               { type: "textMessage", text: "Go away!" },
               { who: "hero", type: "walk", direction: "up", text: "Go away!" },
             ],
           },
         ],
       }),
-      npc2: new Person({
+      npcB: new Person({
         x: withGrid(8),
         y: withGrid(5),
         src: Npc2,
@@ -81,11 +81,16 @@ export const Maps: Map = {
         {
           events: [
             { who: "npc2", type: "walk", direction: "left" },
-            { who: "npc2", type: "stand", direction: "up", time: 500 },
+            { who: "npc2", type: "stand", direction: "up", time: 200 },
             { type: "textMessage", text: "You can't be in there!" },
             { who: "npc2", type: "walk", direction: "right" },
             { who: "hero", type: "walk", direction: "down" },
           ],
+        },
+      ],
+      [asGridCoord(5, 10)]: [
+        {
+          events: [{ type: "changeMap", map: "Kitchen" }],
         },
       ],
     },
@@ -94,19 +99,20 @@ export const Maps: Map = {
     lowerSrc: KitchenLower,
     upperSrc: KitchenUpper,
     gameObjects: {
-      hero: new GameObject({
+      hero: new Person({
         x: withGrid(3),
         y: withGrid(5),
+        isPlayerControlled: true,
       }),
-      npcA: new GameObject({
-        x: withGrid(9),
-        y: withGrid(6),
-        src: Npc2,
-      }),
-      npcB: new GameObject({
+      npcB: new Person({
         x: withGrid(10),
         y: withGrid(8),
         src: Npc3,
+        talking: [
+          {
+            events: [{ type: "textMessage", text: "You made it!", faceHero: "npcB" }],
+          },
+        ],
       }),
     },
     walls: {},

@@ -30,13 +30,14 @@ export interface Walls {
 }
 
 export interface Behavior {
-  type: "walk" | "stand" | "textMessage";
+  type: "walk" | "stand" | "textMessage" | "changeMap";
   direction?: Direction;
   faceHero?: string;
   time?: number;
   who?: string;
   retry?: boolean;
   text?: string;
+  map?: string;
 }
 
 export interface GameObjects {

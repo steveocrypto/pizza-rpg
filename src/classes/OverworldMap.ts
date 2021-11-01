@@ -1,6 +1,7 @@
 import { Behavior, Direction, GameObjects, Walls } from "types";
 import { nextPosition, withGrid } from "utils";
 import { GameObject } from "./GameObject";
+import { Overworld } from "./Overworld";
 import { OverworldEvent } from "./OverworldEvent";
 
 interface OverworldMapConfig {
@@ -12,6 +13,7 @@ interface OverworldMapConfig {
 }
 
 export class OverworldMap {
+  overworld: Overworld | null;
   gameObjects: GameObjects;
   lowerImage: HTMLImageElement;
   upperImage: HTMLImageElement;
@@ -20,6 +22,7 @@ export class OverworldMap {
   cutsceneSpaces: { [coordinates: string]: { events: Behavior[] }[] } = {};
 
   constructor(config: OverworldMapConfig) {
+    this.overworld = null;
     this.gameObjects = config.gameObjects;
     this.walls = config.walls || {};
     this.lowerImage = new Image();

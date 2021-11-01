@@ -62,6 +62,13 @@ export class OverworldEvent {
     message.init(document.querySelector(".game-container")!);
   }
 
+  changeMap(resolve: (value: unknown) => void) {
+    if (this.map.overworld && this.event.map) {
+      this.map.overworld.startMap(this.event.map);
+    }
+    resolve(null);
+  }
+
   async init() {
     return new Promise((resolve) => {
       this[this.event.type](resolve);
