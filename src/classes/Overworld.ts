@@ -17,7 +17,7 @@ export class Overworld {
   constructor(config: Config) {
     this.canvas = config.canvas;
     this.ctx = config.canvas.getContext("2d")!;
-    this.map = new OverworldMap(Maps.Kitchen);
+    this.map = new OverworldMap(Maps.DemoRoom);
     this.directionInput = new DirectionInput();
     this.isReadyToChangeMaps = false;
   }
@@ -97,6 +97,9 @@ export class Overworld {
 
     this.startGameLoop();
 
-    this.map.startCutscene([{ type: "textMessage", text: "This is the very first message!" }]);
+    // this.map.startCutscene([
+    //   { type: "textMessage", text: "This is the very first message!" },
+    //   { type: "changeMap", map: "DemoRoom" },
+    // ]);
   }
 }

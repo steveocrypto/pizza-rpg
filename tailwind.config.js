@@ -16,6 +16,20 @@ module.exports = {
         xxxs: "0.3rem",
         xxs: "0.4rem",
       },
+      animation: {
+        fadeIn: "fadeIn 0.6s forwards",
+        fadeOut: "fadeOut 0.6s forwards",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
+        fadeOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+      },
     },
   },
   variants: {

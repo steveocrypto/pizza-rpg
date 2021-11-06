@@ -2,6 +2,7 @@ import { Behavior } from "types";
 import { oppositeDirection } from "utils";
 import { OverworldMap } from "./OverworldMap";
 import { Person } from "./Person";
+import { SceneTransition } from "./SceneTransition";
 import { TextMessage } from "./TextMessage";
 
 interface Config {
@@ -63,10 +64,15 @@ export class OverworldEvent {
   }
 
   changeMap(resolve: (value: unknown) => void) {
-    if (this.map.overworld && this.event.map) {
-      this.map.overworld.startMap(this.event.map);
-    }
-    resolve(null);
+    const sceneTransition = new SceneTransition();
+    sceneTransition.init(document.querySelector(".game-container")!, () => {
+      if (this.map.overworld && this.event.map) {
+        this.map.overworld.startMap(this.event.map);
+        resolve(null);
+
+        sceneTransition.fadeOut();
+      }
+    });
   }
 
   async init() {
