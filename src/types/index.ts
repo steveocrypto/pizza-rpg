@@ -1,17 +1,6 @@
 import { GameObject } from "classes/GameObject";
 import { Person } from "classes/Person";
 
-// export interface GameObjectType {
-//   x: number;
-//   y: number;
-//   direction?: Direction;
-//   src?: string;
-//   disableShadow?: boolean;
-//   isPlayerControlled?: boolean;
-//   behaviorLoop?: Behavior[];
-//   talking?: { events: Behavior[] }[];
-// }
-
 export type Direction = "up" | "down" | "left" | "right";
 export type Axis = "x" | "y";
 export type DirectionUpdate = Record<Direction, [Axis, number]>;
